@@ -3,7 +3,16 @@ import { greet, bye } from "./greet.js";
 import readline from "node:readline";
 import list from "./list.js";
 import { workDir, goUp, cd } from "./dirWork.js";
-import { copyFile, create, createDir, moveFile, read, removeFile, renameFile } from "./fs.js";
+import {
+  copyFile,
+  create,
+  createDir,
+  moveFile,
+  read,
+  removeFile,
+  renameFile,
+} from "./fs.js";
+import { printOS } from "./os.js";
 
 const curDirMessage = () => {
   console.log(`You are currently in ${workDir}`);
@@ -12,7 +21,7 @@ const curDirMessage = () => {
 greet();
 curDirMessage();
 
-const showInvalidMessage = () => {
+export const showInvalidMessage = () => {
   console.log("Invalid input");
 };
 
@@ -53,6 +62,9 @@ rl.on("line", async (input) => {
       break;
     case "rm":
       await removeFile(args[0]);
+      break;
+    case "os":
+      printOS(args[0]);
       break;
     case ".exit":
       rl.close();
