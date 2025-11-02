@@ -74,7 +74,16 @@ export const moveFile = async (filePath, dirPath) => {
     const write = createWriteStream(copyPath);
 
     await pipeline(read, write);
-    await rm(oldPath)
+    await rm(oldPath);
+  } catch (error) {
+    console.log(errorMessage);
+  }
+};
+
+export const removeFile = async (filePath) => {
+  try {
+    const oldPath = path.resolve(workDir, filePath);
+    await rm(oldPath);
   } catch (error) {
     console.log(errorMessage);
   }
