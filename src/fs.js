@@ -3,7 +3,7 @@ import { workDir } from "./dirWork.js";
 import { createReadStream, createWriteStream } from "node:fs";
 import { stdout } from "node:process";
 import { errorMessage } from "./shared/constants.js";
-import { mkdir, writeFile, rename } from "node:fs/promises";
+import { mkdir, writeFile, rename, rm } from "node:fs/promises";
 import { pipeline } from "node:stream/promises";
 
 export const read = async (filePath) => {
@@ -61,6 +61,20 @@ export const copyFile = async (filePath, dirPath) => {
     const write = createWriteStream(copyPath);
 
     await pipeline(read, write);
+  } catch (error) {
+    console.log(errorMessage);
+  }
+};
+
+export const moveFile = async (filePath, dirPath) => {
+  try {
+    const oldPath = path.resolve(workDir, filePath);
+    const copyPath = path.resolve(workDir, dirPath, path.basename(filePath));
+    const read = createReadStream(oldPath);
+    const write = createWriteStream(copyPath);
+
+    await pipeline(read, write);
+    await rm(oldPath)
   } catch (error) {
     console.log(errorMessage);
   }
