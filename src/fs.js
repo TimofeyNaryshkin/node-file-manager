@@ -3,7 +3,7 @@ import { workDir } from "./dirWork.js";
 import { createReadStream } from "node:fs";
 import { stdout } from "node:process";
 import { errorMessage } from "./shared/constants.js";
-import { writeFile } from "node:fs/promises";
+import { mkdir, writeFile, rename } from "node:fs/promises";
 
 export const read = async (filePath) => {
   const newPath = path.resolve(workDir, filePath);
@@ -25,10 +25,29 @@ export const read = async (filePath) => {
 };
 
 export const create = async (fileName) => {
-  const newPath = path.join(workDir, fileName)
   try {
-    await writeFile(newPath, '', { flag: "wx" });
+    const newPath = path.join(workDir, fileName);
+    await writeFile(newPath, "", { flag: "wx" });
   } catch (error) {
+    console.log(errorMessage);
+  }
+};
+
+export const createDir = async (dirName) => {
+  try {
+    const newPath = path.join(workDir, dirName);
+    await mkdir(newPath);
+  } catch (error) {
+    console.log(errorMessage);
+  }
+};
+
+export const renameFile = async (filePath, newName) => {
+  try {
+    const oldPath = path.join(workDir, filePath);
+    const newPath = path.join(workDir, newName);
+    await rename(oldPath, newPath);
+  } catch (err) {
     console.log(errorMessage);
   }
 };
