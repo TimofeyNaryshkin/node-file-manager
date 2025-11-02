@@ -14,6 +14,7 @@ import {
 } from "./fs.js";
 import { printOS } from "./os.js";
 import { calcHash } from "./hash.js";
+import { compress, decompress } from "./zip.js";
 
 const curDirMessage = () => {
   console.log(`You are currently in ${workDir}`);
@@ -70,6 +71,12 @@ rl.on("line", async (input) => {
     case "hash":
       const path = args.join(' ')
       calcHash(path);
+      break;
+    case "compress":
+      compress(args[0], args[1]);
+      break;
+    case "decompress":
+      decompress(args[0], args[1]);
       break;
     case ".exit":
       rl.close();

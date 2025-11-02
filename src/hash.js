@@ -16,6 +16,5 @@ export const calcHash = async (filePath) => {
     console.log(hexHash);
   } catch (error) {
     console.log(errorMessage);
-    console.log(error.message);
   }
 };
