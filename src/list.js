@@ -1,6 +1,6 @@
 import { readdir } from "fs/promises";
-import { workDir } from "./index.js";
 import { errorMessage } from "./shared/constants.js";
+import { workDir } from "./dirWork.js";
 
 const list = async () => {
   try {
