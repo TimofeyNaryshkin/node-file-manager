@@ -1,5 +1,4 @@
 import { EOL, arch, cpus, homedir, userInfo } from "node:os";
-import { stdout } from "node:process";
 import { showInvalidMessage } from "./index.js";
 
 export const printOS = (arg) => {

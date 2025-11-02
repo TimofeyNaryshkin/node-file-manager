@@ -13,6 +13,7 @@ import {
   renameFile,
 } from "./fs.js";
 import { printOS } from "./os.js";
+import { calcHash } from "./hash.js";
 
 const curDirMessage = () => {
   console.log(`You are currently in ${workDir}`);
@@ -65,6 +66,10 @@ rl.on("line", async (input) => {
       break;
     case "os":
       printOS(args[0]);
+      break;
+    case "hash":
+      const path = args.join(' ')
+      calcHash(path);
       break;
     case ".exit":
       rl.close();
