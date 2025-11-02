@@ -3,7 +3,7 @@ import { greet, bye } from "./greet.js";
 import readline from "node:readline";
 import list from "./list.js";
 import { workDir, goUp, cd } from "./dirWork.js";
-import { read } from "./fs.js";
+import { create, read } from "./fs.js";
 
 const curDirMessage = () => {
   console.log(`You are currently in ${workDir}`);
@@ -34,7 +34,10 @@ rl.on("line", async (input) => {
       await list();
       break;
     case "cat":
-      await read(args.join(' '));
+      await read(args.join(" "));
+      break;
+    case "add":
+      await create(args.join(" "));
       break;
     case ".exit":
       rl.close();

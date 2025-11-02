@@ -1,9 +1,9 @@
 import path from "node:path";
 import { workDir } from "./dirWork.js";
 import { createReadStream } from "node:fs";
-import { pipeline } from "node:stream/promises";
 import { stdout } from "node:process";
 import { errorMessage } from "./shared/constants.js";
+import { writeFile } from "node:fs/promises";
 
 export const read = async (filePath) => {
   const newPath = path.resolve(workDir, filePath);
@@ -22,4 +22,13 @@ export const read = async (filePath) => {
       resolve();
     });
   });
+};
+
+export const create = async (fileName) => {
+  const newPath = path.join(workDir, fileName)
+  try {
+    await writeFile(newPath, '', { flag: "wx" });
+  } catch (error) {
+    console.log(errorMessage);
+  }
 };
