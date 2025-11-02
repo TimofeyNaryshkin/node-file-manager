@@ -69,14 +69,14 @@ rl.on("line", async (input) => {
       printOS(args[0]);
       break;
     case "hash":
-      const path = args.join(' ')
-      calcHash(path);
+      const path = args.join(" ");
+      await calcHash(path);
       break;
     case "compress":
-      compress(args[0], args[1]);
+      await compress(args[0], args[1]);
       break;
     case "decompress":
-      decompress(args[0], args[1]);
+      await decompress(args[0], args[1]);
       break;
     case ".exit":
       rl.close();
